@@ -1,28 +1,25 @@
 
 public class TabelaHash{
-    public static class TabelaEntrada{
-        String chave;
-        int valor;
-
-        public TabelaEntrada(String chave, int valor) {
-            this.chave = chave;
-            this.valor = valor;
-        }    
-    }
+    String chave;
+    int valor;
+    TabelaHash[] tabela; //array que recebe os valores
 
 
-    public TabelaEntrada[] tabela; //array que recebe os valores
+    public TabelaHash(String chave, int valor) {
+        this.chave = chave;
+        this.valor = valor;
+    }    
 
     public TabelaHash(int capacidade){
-        tabela = new TabelaEntrada[capacidade];
+        tabela = new TabelaHash[capacidade];
     }
 
     public void put(String chave, int valor){
-        int hash = Math.abs(chave.hashCode());
-        int indice = hash%tabela.length;
-        
+        //int hash = Math.abs(chave.hashCode());
+        int indice = chave.length()%tabela.length;
+
         // Encontrar a chave ou o próximo vazio
-        TabelaEntrada entrada = tabela[indice];
+        TabelaHash entrada = tabela[indice];
         while (entrada != null) {
             if (entrada.chave.equals(chave)) {
                 break;
@@ -31,12 +28,12 @@ public class TabelaHash{
             entrada = tabela[indice];
         }
 
-        tabela[indice] = new TabelaEntrada(chave, valor);
+        tabela[indice] = new TabelaHash(chave, valor);
 
     }
 
-    public TabelaEntrada remove(String chave){
-        TabelaEntrada temp;
+    public TabelaHash remove(String chave){
+        TabelaHash temp;
         int hash = Math.abs(chave.hashCode()); 
 
         temp = tabela[hash];
@@ -45,10 +42,28 @@ public class TabelaHash{
         return temp;
     }
 
+    public void clear(){
+       tabela = null;
+       valor = 0;
+       chave = null;
+    }    
+
     public void print(){
         for (int i = 0; i < tabela.length; i++) {
-            TabelaEntrada entrada = tabela[i];
+            TabelaHash entrada = tabela[i];
             System.out.println(i+": "+(entrada == null ? "null" : entrada.chave+" --> "+entrada.valor));
+        }
+    }
+
+    public int size(){
+       return tabela.length;
+    }
+
+    public boolean isEmpty(){
+        if (tabela.length == 0) {
+            return true;
+        }else{
+            return false;
         }
     }
 }
