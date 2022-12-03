@@ -1,3 +1,4 @@
+
 public class TabelaHash{
     public static class TabelaEntrada{
         String chave;
@@ -32,6 +33,16 @@ public class TabelaHash{
 
         tabela[indice] = new TabelaEntrada(chave, valor);
 
+    }
+
+    public TabelaEntrada remove(String chave){
+        TabelaEntrada temp;
+        int hash = Math.abs(chave.hashCode()); 
+
+        temp = tabela[hash];
+        tabela[hash] = null;
+        
+        return temp;
     }
 
     public void print(){
