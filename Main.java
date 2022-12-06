@@ -1,12 +1,18 @@
 public class Main {
     public static void main(String[] args) {
-        TabelaHash table = new TabelaHash(5);
+        TabelaHash table = new TabelaHash(10);
 
-        table.put(null, 0);
-        table.remove(null);
-        table.clear();
-        table.isEmpty();
-        //table.remove("Teodoro");
+        table.put("Priscila", 12);
+        table.put("Maria", 10);
+        table.put("Clara", 7);
+        table.put("Marcos", 0);
+
+
+        //table.remove("Priscila");
         
+        table.clear();
+        System.out.println(table.isEmpty()); 
+        System.out.println(table.size());
+        table.print();
     }
 }
